@@ -16,7 +16,10 @@ using DataMapper.Data;
 namespace DataMapper
 {
     public class Startup
+
     {
+        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,17 +36,32 @@ namespace DataMapper
             services.AddDbContext<DataMapsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DataMapsContext")));
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials()
-                    );
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials()
+            //        );
+            //});
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: MyAllowSpecificOrigins,
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("http://example.com",
+            //                                "http://www.contoso.com",
+            //                                "http://localhost");
+            //        });
+            //});
 
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
+
+
+            //MvcOptions.EnableEndpointRouting = false
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
 
             // In production, the Angular files will be served from this directory
             //services.AddSpaStaticFiles(configuration =>
@@ -66,17 +84,18 @@ namespace DataMapper
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
+            //app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors("default");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             //app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller}/{action=Index}/{id?}");
+            //});
 
             //app.UseSpa(spa =>
             //{
@@ -91,15 +110,16 @@ namespace DataMapper
             //    }
             //});
 
-            //app.UseRouting();
+            app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
         }
+
     }
 }

@@ -13,6 +13,7 @@ namespace DataMapper.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
+    //[DisableCors]
     public class DataMapsController : ControllerBase
     {
         private readonly DataMapsContext _context;

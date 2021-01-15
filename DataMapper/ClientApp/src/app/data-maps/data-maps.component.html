@@ -1,1 +1,43 @@
-<p>data-maps works!</p>
+<h1>Data Maps</h1>
+
+<p *ngIf="!(dataMaps$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New Data Map</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(dataMaps$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>CustNo</th>
+      <th>State</th>
+      <th>Table</th>
+      <th>Data 1 Value</th>
+      <th>Data 1 Description</th>
+      <th>Data Int Value</th>
+      <th>Data 2 Value</th>
+      <th>Data 2 Description</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataMap of (dataMaps$ | async)">
+      <td>{{ dataMap.dataMapId }}</td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.custno }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.state }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.table }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.data1Value }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.data1Description }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.dataIntValue }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.data2Value }}</a></td>
+      <td><a [routerLink]="['/dataMap/', dataMap.dataMapId]">{{ dataMap.data2Description }}</a></td>
+      <td>{{ dataMap.created | date: "dd.MM.y" }}</td>
+      <td>{{ dataMap.updated | date: "dd.MM.y" }}</td>
+      <td><a [routerLink]="['/dataMap/edit/', dataMap.dataMapId]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(dataMap.dataMapId)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

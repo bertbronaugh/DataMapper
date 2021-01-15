@@ -1,1 +1,18 @@
-<p>data-map works!</p>
+<ng-container *ngIf="(dataMap$ | async) as dataMap; else loading">
+
+    <h1>{{ dataMap.data1Value }}</h1>
+    <h2>{{ dataMap.data1Description }}</h2>
+    <!-- <div>{{ dataMap.body }}</div> -->
+    <ul>
+      <li>{{ dataMap.custno }}</li>
+      <li>{{ dataMap.state }}</li>
+      <li>{{ dataMap.table }}</li>
+      <li>{{ dataMap.dataIntValue }}</li>
+      <li>{{ dataMap.data2Value }}</li>
+      <li>{{ dataMap.data2Description }}</li>
+      <li>{{ dataMap.created }}</li>
+      <li>{{ dataMap.updated }}</li>
+    </ul>
+  
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>

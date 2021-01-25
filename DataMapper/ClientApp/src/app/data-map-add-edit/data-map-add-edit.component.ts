@@ -54,14 +54,14 @@ export class DataMapAddEditComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         dataMapId: 0,
-        formCustno: [99, [Validators.required]],
+        formCustno: [99, [Validators.required, Validators.minLength(4)]],
         formState: ['', [Validators.required]],
         formTable: ['', [Validators.required]],
         formData1Value: ['', [Validators.required]],
-        formData1Description: ['', [Validators]],
+        formData1Description: [''], // took away [Validators] to see if that fixes loading
         formDataIntValue: [0, [Validators.required]],
         formData2Value: ['', [Validators.required]],
-        formData2Description: ['', [Validators]]
+        formData2Description: ['']
         // title: ['', [Validators.required]],
         // body: ['', [Validators.required]],
       }

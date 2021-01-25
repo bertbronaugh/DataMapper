@@ -19,7 +19,7 @@ export class DataMapService {
   };
   constructor(private http: HttpClient) {
       this.myAppUrl = environment.appUrl;
-      this.myApiUrl = 'api/DataMaps/';
+      this.myApiUrl = '/api/DataMaps/';
   }
 
   getDataMaps(): Observable<DataMap[]> {

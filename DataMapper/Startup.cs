@@ -25,12 +25,29 @@ namespace DataMapper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddControllers();
+
+
+
+            // This code below was adding during my tinkering and trying to get the tutorial steps
+            // to jive with .NET Core 3.0
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddDbContext<DataMapsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DataMapsContext")));
 
+            services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
+
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
+
+            // This code below was either originally here or added during the tutorial, but later scrapped.
             //services.AddCors(options =>
             //{
             //    options.AddPolicy("CorsPolicy",
@@ -52,17 +69,8 @@ namespace DataMapper
             //        });
             //});
 
-            services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
-
-
             //MvcOptions.EnableEndpointRouting = false
             //services.AddMvc(options => options.EnableEndpointRouting = false);
-
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
 
         }
 
@@ -79,11 +87,41 @@ namespace DataMapper
                 app.UseHsts();
             }
 
-            //app.UseCors(MyAllowSpecificOrigins);
-            app.UseCors("default");
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials()
+            );
             app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseStaticFiles();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             app.UseSpaStaticFiles();
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+                spa.Options.StartupTimeout = new System.TimeSpan(0, 5, 0);
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
+
+            // The commented lines below may not be needed anymore.
+            // I'm just trying to get my API to work.
+            //app.UseCors(MyAllowSpecificOrigins);
+            //app.UseCors("default");
             //UseStaticFiles(app);
             //public static Microsoft.AspNetCore.Builder.IApplicationBuilder 
             //UseStaticFiles(this Microsoft.AspNetCore.Builder.IApplicationBuilder app);
@@ -95,27 +133,6 @@ namespace DataMapper
             //        template: "{controller}/{action=Index}/{id?}");
             //});
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
 
         }
 

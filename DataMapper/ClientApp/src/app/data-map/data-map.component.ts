@@ -10,7 +10,7 @@ import { DataMap } from '../models/datamap';
   styleUrls: ['./data-map.component.scss']
 })
 export class DataMapComponent implements OnInit {
-  dataMaps$: Observable<DataMap>;
+  dataMap$: Observable<DataMap>;
   dataMapId: number;
 
   constructor(private DataMapService: DataMapService, private avRoute: ActivatedRoute) {
@@ -25,6 +25,6 @@ export class DataMapComponent implements OnInit {
   }
 
   loadDataMap() {
-    this.dataMaps$ = this.DataMapService.getDataMap(this.dataMapId);
+    this.dataMap$ = this.DataMapService.getDataMap(this.dataMapId);
   }
 }

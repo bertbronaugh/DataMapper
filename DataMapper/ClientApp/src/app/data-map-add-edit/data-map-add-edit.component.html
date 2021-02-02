@@ -3,71 +3,71 @@
   <div class="form-group row">
     <label class=" control-label col-md-12" for="CustNo">CustNo</label>
     <div class="col-md-12">
-      <input class="form-control" type="text" formControlName="custno">
+      <input class="form-control" type="text" formControlName="formCustno">
     </div>
-    <span class="text-danger ml-3" *ngIf="custno.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="custno?.invalid && formDir.submitted">
       CustNo is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="State">State</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="state"></textarea>
+      <input class="form-control" type="text" formControlName="formState">
     </div>
-    <span class="text-danger ml-3" *ngIf="state.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="state?.invalid && formDir.submitted">
       State is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="Table">Table</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="table"></textarea>
+      <input class="form-control" type="text" formControlName="formTable">
     </div>
-    <span class="text-danger ml-3" *ngIf="table.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="table?.invalid && formDir.submitted">
       Table is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="Data1Value">Data 1 Value</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="data1Value"></textarea>
+      <input class="form-control" type="text" formControlName="formData1Value">
     </div>
-    <span class="text-danger ml-3" *ngIf="data1Value.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="data1Value?.invalid && formDir.submitted">
       Data 1 Value is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="Data1Description">Data 1 Description</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="data1Description"></textarea>
+      <input class="form-control" type="text" formControlName="formData1Description">
     </div>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="DataIntValue">Data Int Value</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="dataIntValue"></textarea>
+      <input class="form-control" type="text" formControlName="formDataIntValue">
     </div>
-    <span class="text-danger ml-3" *ngIf="dataIntValue.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="dataIntValue?.invalid && formDir.submitted">
       Data Int Value is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="Data2Value">Data 2 Value</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="data2Value"></textarea>
+      <input class="form-control" type="text" formControlName="formData2Value">
     </div>
-    <span class="text-danger ml-3" *ngIf="data2Value.invalid && formDir.submitted">
+    <span class="text-danger ml-3" *ngIf="data2Value?.invalid && formDir.submitted">
       Data 2 Value is required.
     </span>
   </div>
   <div class="form-group row">
     <label class="control-label col-md-12" for="Data2Description">Data 2 Description</label>
     <div class="col-md-12">
-      <textarea class="form-control" rows="15" formControlName="data2Description"></textarea>
+      <input class="form-control" type="text" formControlName="formData2Description">
     </div>
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-success float-right">Save</button>
-    <button class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
+    <button class="btn btn-secondary float-left" type="button" (click)="cancel()">Cancel</button>
   </div>
 </form>

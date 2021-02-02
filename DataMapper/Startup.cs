@@ -26,7 +26,9 @@ namespace DataMapper
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            //https://stackoverflow.com/questions/57626878/the-json-value-could-not-be-converted-to-system-int32
+            services.AddControllers().AddNewtonsoftJson();
+            //services.AddControllers();
 
 
 

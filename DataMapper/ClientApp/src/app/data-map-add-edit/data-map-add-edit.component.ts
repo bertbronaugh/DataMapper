@@ -37,7 +37,7 @@ export class DataMapAddEditComponent implements OnInit {
   constructor(private DataMapService: DataMapService, private formBuilder: FormBuilder, private avRoute: ActivatedRoute, private router: Router) {
     const idParam = 'id';
     this.actionType = 'Add';
-    this.formCustno = 99;
+    this.formCustno = 9999;
     this.formState = 'TX';
     this.formTable = 'table';
     this.formData1Value = 'data1Value';
@@ -75,14 +75,14 @@ export class DataMapAddEditComponent implements OnInit {
       this.DataMapService.getDataMap(this.dataMapId)
         .subscribe(data => (
           this.existingDataMap = data,
-          this.form.controls[this.formCustno].setValue(data.custno),
-          this.form.controls[this.formState].setValue(data.state),
-          this.form.controls[this.formTable].setValue(data.table),
-          this.form.controls[this.formData1Value].setValue(data.data1Value),
-          this.form.controls[this.formData1Description].setValue(data.data1Description),
-          this.form.controls[this.formDataIntValue].setValue(data.dataIntValue),
-          this.form.controls[this.formData2Value].setValue(data.data2Value),
-          this.form.controls[this.formData2Description].setValue(data.data2Description)
+          this.form.controls['formCustno'].setValue(data.custno),
+          this.form.controls['formState'].setValue(data.state),
+          this.form.controls['formTable'].setValue(data.table),
+          this.form.controls['formData1Value'].setValue(data.data1Value),
+          this.form.controls['formData1Description'].setValue(data.data1Description),
+          this.form.controls['formDataIntValue'].setValue(data.dataIntValue),
+          this.form.controls['formData2Value'].setValue(data.data2Value),
+          this.form.controls['formData2Description'].setValue(data.data2Description)
         ));
     }
   }
@@ -96,14 +96,14 @@ export class DataMapAddEditComponent implements OnInit {
       let dataMap: DataMap = {
         created: new Date(),
         updated: new Date(),
-        custno: this.form.get(this.formCustno.toString()).value,
-        state: this.form.get(this.formState).value,
-        table: this.form.get(this.formTable).value,
-        data1Value: this.form.get(this.formData1Value).value,
-        data1Description: this.form.get(this.formData1Description).value,
-        dataIntValue: this.form.get(this.formDataIntValue.toString()).value,
-        data2Value: this.form.get(this.formData2Value).value,
-        data2Description: this.form.get(this.formData2Description).value
+        custno: this.form.get('formCustno').value,
+        state: this.form.get('formState').value,
+        table: this.form.get('formTable').value,
+        data1Value: this.form.get('formData1Value').value,
+        data1Description: this.form.get('formData1Description').value,
+        dataIntValue: this.form.get('formDataIntValue').value,
+        data2Value: this.form.get('formData2Value').value,
+        data2Description: this.form.get('formData2Description').value
 
         // dt: new Date(),
         // creator: 'Martin',
@@ -123,14 +123,14 @@ export class DataMapAddEditComponent implements OnInit {
         created: this.existingDataMap.created,
         updated: new Date(),
         
-        custno: this.form.get(this.formCustno.toString()).value,
-        state: this.form.get(this.formState).value,
-        table: this.form.get(this.formTable).value,
-        data1Value: this.form.get(this.formData1Value).value,
-        data1Description: this.form.get(this.formData1Description).value,
-        dataIntValue: this.form.get(this.formDataIntValue.toString()).value,
-        data2Value: this.form.get(this.formData2Value).value,
-        data2Description: this.form.get(this.formData2Description).value
+        custno: this.form.get('formCustno').value,
+        state: this.form.get('formState').value,
+        table: this.form.get('formTable').value,
+        data1Value: this.form.get('formData1Value').value,
+        data1Description: this.form.get('formData1Description').value,
+        dataIntValue: this.form.get('formDataIntValue').value,
+        data2Value: this.form.get('formData2Value').value,
+        data2Description: this.form.get('formData2Description').value
         // postId: this.existingDataMap.postId,
         // dt: this.existingDataMap.dt,
         // creator: this.existingDataMap.creator,
@@ -148,13 +148,13 @@ export class DataMapAddEditComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  get custno() { return this.form.get(this.formCustno.toString()); }
-  get state() { return this.form.get(this.formState); }
-  get table() { return this.form.get(this.formTable); }
-  get data1Value() { return this.form.get(this.formData1Value); }
-  get data1Description() { return this.form.get(this.formData1Description); }
-  get dataIntValue() { return this.form.get(this.formDataIntValue.toString()); }
-  get data2Value() { return this.form.get(this.formData2Value); }
-  get data2Description() { return this.form.get(this.formData2Description); }
+  get custno() { return this.form.get('formCustno'); }
+  get state() { return this.form.get('formState'); }
+  get table() { return this.form.get('formTable'); }
+  get data1Value() { return this.form.get('formData1Value'); }
+  get data1Description() { return this.form.get('formData1Description'); }
+  get dataIntValue() { return this.form.get('formDataIntValue'); }
+  get data2Value() { return this.form.get('formData2Value'); }
+  get data2Description() { return this.form.get('formData2Description'); }
 
 }

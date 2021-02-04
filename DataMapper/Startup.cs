@@ -27,7 +27,10 @@ namespace DataMapper
         {
 
             //https://stackoverflow.com/questions/57626878/the-json-value-could-not-be-converted-to-system-int32
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers()
+                    .AddNewtonsoftJson();
+                    //.AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
+            //https://stackoverflow.com/questions/38202039/json-properties-now-lower-case-on-swap-from-asp-net-core-1-0-0-rc2-final-to-1-0
             //services.AddControllers();
 
 

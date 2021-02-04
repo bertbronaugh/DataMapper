@@ -2,7 +2,7 @@ export class DataMap {
 
     dataMapId?: number;
 
-    custno: number;
+    custNo: number;
 
     state: string;
 

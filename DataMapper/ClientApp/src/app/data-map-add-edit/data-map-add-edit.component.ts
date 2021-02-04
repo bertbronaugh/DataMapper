@@ -54,7 +54,7 @@ export class DataMapAddEditComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         dataMapId: 0,
-        formCustno: [99, [Validators.required, Validators.minLength(4)]],
+        formCustno: [9999, [Validators.required, Validators.minLength(4)]],
         formState: ['', [Validators.required]],
         formTable: ['', [Validators.required]],
         formData1Value: ['', [Validators.required]],
@@ -75,7 +75,7 @@ export class DataMapAddEditComponent implements OnInit {
       this.DataMapService.getDataMap(this.dataMapId)
         .subscribe(data => (
           this.existingDataMap = data,
-          this.form.controls['formCustno'].setValue(data.custno),
+          this.form.controls['formCustno'].setValue(data.custNo),
           this.form.controls['formState'].setValue(data.state),
           this.form.controls['formTable'].setValue(data.table),
           this.form.controls['formData1Value'].setValue(data.data1Value),
@@ -96,7 +96,7 @@ export class DataMapAddEditComponent implements OnInit {
       let dataMap: DataMap = {
         created: new Date(),
         updated: new Date(),
-        custno: this.form.get('formCustno').value,
+        custNo: this.form.get('formCustno').value,
         state: this.form.get('formState').value,
         table: this.form.get('formTable').value,
         data1Value: this.form.get('formData1Value').value,
@@ -123,7 +123,7 @@ export class DataMapAddEditComponent implements OnInit {
         created: this.existingDataMap.created,
         updated: new Date(),
         
-        custno: this.form.get('formCustno').value,
+        custNo: this.form.get('formCustno').value,
         state: this.form.get('formState').value,
         table: this.form.get('formTable').value,
         data1Value: this.form.get('formData1Value').value,
@@ -148,7 +148,7 @@ export class DataMapAddEditComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  get custno() { return this.form.get('formCustno'); }
+  get custNo() { return this.form.get('formCustno'); }
   get state() { return this.form.get('formState'); }
   get table() { return this.form.get('formTable'); }
   get data1Value() { return this.form.get('formData1Value'); }
